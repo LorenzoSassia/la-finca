@@ -1,6 +1,4 @@
-.navbar {
-    background-color: aqua;
-}
+ 
 
 .card {
     background-color: rgba(0, 0, 247, 0.801); 
@@ -12,4 +10,8 @@
 
 .card .btn {
     background-color: rgb(4, 187, 4) ;
+}
+
+.form {
+    background-color: rgb(114, 70, 13);
 }
