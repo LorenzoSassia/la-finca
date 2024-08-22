@@ -1,8 +1,9 @@
 <?php
-require_once('confi.php');
+require_once('config.php');
 
 class Modelo {
     protected $db
+    // Creamos el constructor con la conexion a la BD
     public function __construct() {
         $this->db = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
         if($this->db->connect_errno){
@@ -124,4 +125,32 @@ class ModeloABM extends Modelo {
         // Ejecutamos la instruccion SQL
         $this->db->query($sql);
     }
+
+    /**
+     * Actualizamos los datos de una tabla
+     * @param valores: los valores a modififcar 
+     */
+    public function actualizar($valores) {
+        // UPDATE productos SET precio = '350000' WHERE id=8
+        $sql = "UPDATE $this->tabla SET";
+        // Para cada $valores como $key => $value
+        foreach($valores as $key => $value) {
+            $sql .= $key. "='".$value"',";
+        }
+        $sql = substr($sql,0,strlen($sql)-1); // Quitamos la ultima coma ","
+        //
+        $sql .= "WHERE $this->criterio";
+        echo $sql.'<br>';
+        $this->db->query($sql);
+    }
+
+    /**
+     * Elimina registros de una tabla
+     */
+    public function eliminar() {
+        // DELETE FROM productos WHERE id='8'
+        $sql = "DELETE FROM $this->tabla WHERE $this->criterio";
+        $this->db->query($sql);
+    }
+
 }
