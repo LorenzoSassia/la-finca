@@ -18,11 +18,12 @@ const inputCodigo = document.querySelector('#codigo');
 const inputDireccion = document.querySelector('#direccion');
 const inputNumero = document.querySelector('#numero');
 const inputLetra = document.querySelector('#letra');
-const inputCodigo_postal = document.querySelector('#codigo_postal');
+const inputCodigo_postal = document.querySelector('#codigo-postal');
 const inputLocalidad = document.querySelector('#localidad');
 const inputProvincia = document.querySelector('#provincia');
-const inputTipo = document.querySelector('#piso');
-const inputObservaciones = document.querySelector('#Observaciones');
+const inputPiso = document.querySelector('#piso');
+const inputObservaciones = document.querySelector('#observaciones');
+const inputTipo = document.querySelector("#tipo");
 
 // Imagen del formulario
 const frmImagen = document.querySelector('#frmImagen');
@@ -40,7 +41,7 @@ let mensajeAlerta;
 
 document.addEventListener('DOMContentLoaded', () => {
     mostrarPropiedades();
-})
+});
 
 /*
 * Obtiene las propiedades y los muestra
@@ -48,22 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
 async function mostrarPropiedades() {
     const propiedades = await seleccionarPropiedades();
 
-
 propiedades.map(propiedad =>
     listado.innerHTML += `
         <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="imagenes/${propiedad.imagen}" class="card-img-top" alt="...">
-                 <div class="card-body">
-                  <h5 class="card-title"><span name="spancodigo">${propiedad.codigo}</span> -<span name="spantipo">  ${propiedad.inputTipo}</span></h5>
-                </div>
-            </div>
-        </div>
-               
-    `
-
-
- );
+                    <div class="card" style="width: 18rem;">
+                        <img src="imagenes/${propiedad.imagen} " class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
+                            <p class="card-text"></p>
+                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
+                        </div>
+                    </div>               
+    `);
 }
 
 /**
@@ -78,13 +75,13 @@ btnNuevo.addEventListener('click', ()=> {
     inputCodigo_postal.value= null;
     inputLocalidad.value= null;  
     inputProvincia.value= null;        
+    inputPiso.value= null;  
+    inputObservaciones.value= null; 
     inputTipo.value= null;  
-    inputObservaciones.value= null;   
     frmImagen.src = './imagenes/nodisponible.png';
 
     // Mostrar el formulario modal
     formularioModal.show();
-
     opcion = 'insertar'; 
 })
 
@@ -102,7 +99,7 @@ formulario.addEventListener('submit', (e) => {
             insertarPropiedades(datos);
             break;
     }
-    insertarAlerta(mensajeAlerta, 'success')
+    insertarAlerta(mensajeAlerta, 'success');
     mostrarPropiedades();
 })
 

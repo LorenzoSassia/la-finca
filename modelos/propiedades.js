@@ -20,7 +20,7 @@ export async function seleccionarPropiedades() {
 export function insertarPropiedades(datos) {
     fetch(`${url}&accion=insertar`, {
         method: 'POST',
-        body: datos  
+        body: datos
     })
     .then(res=>res.json())
     .then(data=> {
