@@ -1,4 +1,4 @@
-import { seleccionarPropiedades, insertarPropiedades } from "../modelos/propiedades.js";
+import { seleccionarPropiedades, insertarPropiedades, actualizarPropiedades, eliminarPropiedades } from "../modelos/propiedades.js";
 
 
 /* Objetos del DOM*/
@@ -49,11 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
 async function mostrarPropiedades() {
     const propiedades = await seleccionarPropiedades();
 
+listado.innerHTML = '';
+
 propiedades.map(propiedad =>
     listado.innerHTML += `
         <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="imagenes/${propiedad.imagen} " class="card-img-top" alt="...">
+                        <img src="./imagenes/${propiedad.imagen??'nodisponible.png'}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text"></p>

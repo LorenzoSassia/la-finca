@@ -2,7 +2,7 @@
 require_once('config.php');
 
 class Modelo {
-    protected $db
+    protected $db;
     // Creamos el constructor con la conexion a la BD
     public function __construct() {
         $this->db = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
@@ -10,9 +10,9 @@ class Modelo {
             echo 'Fallo al conectar a MySQL: '.$this->db->connect_errno;
             return; 
         }
+        $this->db->set_charset(DB_CHARSET);
+        $this->db->query('SET NAMES "utf8"');
     }
-    $this->db->set_charset(DB_CHARSET);
-    $this->db->query('SET NAMES "utf8"');
 
 }
 
@@ -135,7 +135,7 @@ class ModeloABM extends Modelo {
         $sql = "UPDATE $this->tabla SET";
         // Para cada $valores como $key => $value
         foreach($valores as $key => $value) {
-            $sql .= $key. "='".$value"',";
+            $sql .= $key. "='".$value."',";
         }
         $sql = substr($sql,0,strlen($sql)-1); // Quitamos la ultima coma ","
         //
