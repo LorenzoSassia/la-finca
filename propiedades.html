@@ -27,9 +27,41 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a>
+                        <a class="nav-link" href="registrarse.html">Registrarse</a>
                     </li>
                 </ul>
+            </div>
+            <div id="nav-login">
+                <div id="div-login">
+                  <form class="d-flex" id="form-login">
+                    <input
+                      class="form-control me-2"
+                      type="text"
+                      name="usuario"
+                      id="usuario"
+                      placeholder="Usuario"
+                      aria-label="Usuario"
+                    />
+                    <input
+                      class="form-control me-2"
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Contraseña"
+                      aria-label="Contraseña"
+                    />
+                    <button class="btn btn-outline-success" type="submit">
+                      Login
+                    </button>
+                  </form>
+                </div>
+                <div id="div-logout" style="display: none;">
+                  <span id="texto-logueado" class="text-white"></span>
+                  <button id="btn-logout" class="btn btn-outline-primary">
+                    Cerrar sesión
+                  </button>
+                </div>
+              </div>
             </div>
         </div>
     </nav>
@@ -57,7 +89,7 @@
                         <div class="container-fluid" id="modalContent">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <img src="./imagenes/nodisponible.png" alt="Imagen no disponible" id="frmImagen">
+                                    <img src="./imagenes/nodisponible.png" alt="Imagen no disponible" id="frmImagen" class="img-thumbnail">
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagen" class="form-label">Seleccionar imagen</label>

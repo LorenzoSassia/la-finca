@@ -5,11 +5,16 @@ $mensaje= '';
 
 if(isset($_GET['tabla'])) {
     $tabla = new ModeloABM($_GET['tabla']);
-    if(isset($_GET['accion'])){
-        if($_GET['accion'] == 'insertar'){
+
+        if(isset($_GET['accion'])){
+            if($_GET['accion'] == 'insertar '|| $_GET['accion'] == 'actualizar'){
             $valores = $_POST;
         }
 
+        if(isset($_GET['id'])){
+            $tabla->set_criterio("id=".$_GET['id']);
+        }
+    
         // ------------- SUBIDA DE IMAGENES -------------
         if(
             isset($_FILES) && // Si esta seteado el array $_FILES

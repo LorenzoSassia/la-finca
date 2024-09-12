@@ -33,6 +33,9 @@ let opcion = '';
 let id;
 let mensajeAlerta;
 
+let propiedades = [];
+let propiedad = {};
+
 
 
 /**
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 * Obtiene las propiedades y los muestra
 */
 async function mostrarPropiedades() {
-    const propiedades = await seleccionarPropiedades();
+    propiedades = await seleccionarPropiedades();
 
 listado.innerHTML = '';
 
@@ -58,10 +61,17 @@ propiedades.map(propiedad =>
                         <img src="./imagenes/${propiedad.imagen??'nodisponible.png'}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
-                            <p class="card-text"></p>
+                            <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
                             <a href="comprar.html" class="btn btn-primary">Comprar</a>
+                            <div class="card-footer "> 
+                                 <a class="btn-editar btn btn-primary"> Editar</a> 
+                                 <a class="btn-borrar btn btn-danger" > Borrar</a>
+                                 <input type="hidden" class="id-propiedad" value="${propiedad.id}">
+                                 <input type="hidden" class="imagen-propiedad" value="${propiedad.imagen??'nodisponible.png'}">
+                            </div>
                         </div>
-                    </div>               
+                    </div> 
+        </div>               
     `);
 }
 
@@ -100,6 +110,12 @@ formulario.addEventListener('submit', (e) => {
             mensajeAlerta = 'Datos guardados';
             insertarPropiedades(datos);
             break;
+
+            case 'actualizar':
+            mensajeAlerta = 'Datos actualizados';
+            actualizarArticulos(datos, id);
+            break;
+
     }
     insertarAlerta(mensajeAlerta, 'success');
     mostrarPropiedades();
@@ -120,3 +136,75 @@ const insertarAlerta = (mensaje, tipo) => {
     `;
     alerta.append(envoltorio);
 }
+
+/**
+ * Determina en que elemento se realiza un evento 
+ * @param elemento el elemento al que se le realiza el evento
+ * @param evento el evento realizado
+ * @param selector el selector seleccionado
+ * @param manejador el metodo que maneja el evento
+ */
+const on =(elemento, evento, selector, manejador) => {
+    elemento.addEventListener(evento, e => { // Agregamos el metodo para escuchar el evento
+        if(e.target.closest(selector)){ // Si el objetivo del manejador es el selector
+            manejador(e); // Ejecutamos el metodo manejador
+        }
+    })
+}
+
+/**
+ * Funcion para el boton Editar
+ */
+on(document, 'click', '.btn-editar', e => {
+    const cardFooter = e.target.parentNode; // Guardamos el elemento padre del boton
+
+    // Guardamos los valores del card de la Propiedad
+    id = cardFooter.querySelector('.id-propiedad').value;
+    /*
+    const codigo = cardFooter.parentNode.querySelector('span[name=spancodigo]').innerHTML;
+    const direccion = cardFooter.parentNode.querySelector('span[name=spandireccion]').innerHTML;
+    const numero = cardFooter.parentNode.querySelector('span[name=spannumero]').innerHTML;
+    const letra = cardFooter.parentNode.querySelector('span[name=spanletra]').innerHTML;
+    const codigo_postal = cardFooter.parentNode.querySelector('span[name=spancodigo_postal]').innerHTML;
+    const localidad = cardFooter.parentNode.querySelector('span[name=spanlocalidad]').innerHTML;
+    const provincia = cardFooter.parentNode.querySelector('span[name=spanprovincia]').innerHTML;
+    const piso = cardFooter.parentNode.querySelector('span[name=spanpiso]').innerHTML;
+    const observaciones = cardFooter.parentNode.querySelector('span[name=spanobservaciones]').innerHTML;
+    const tipo = cardFooter.parentNode.querySelector('span[name=spantipo]').innerHTML;
+    const imagen = cardFooter.querySelector('.imagen-propiedad').value;
+    */
+    propiedad = propiedades.find(item => item.id == id);
+    console.log(propiedad);
+    // Asignamos los valore a los inputs del formulario
+    inputCodigo.value = propiedad.codigo;
+    inputDireccion.value= propiedad.direccion; 
+    inputNumero.value= propiedad.numero; 
+    inputLetra.value= propiedad.letra;
+    inputCodigo_postal.value= propiedad.codigo_postal;
+    inputLocalidad.value= propiedad.localidad;  
+    inputProvincia.value= propiedad.provincia;        
+    inputPiso.value= propiedad.piso;  
+    inputObservaciones.value= propiedad.observaciones; 
+    inputTipo.value= propiedad.tipo;  
+    frmImagen.src = `./imagenes/${propiedad.imagen}`;
+
+    // Mostramos el formulario
+    formularioModal.show();
+
+    opcion = 'actualizar';
+})
+
+/**
+ * Funcion para el boton borrar 
+ */
+on(document, 'click', '.btn-borrar', e => {
+    const cardFooter = e.target.parentNode;
+    id = cardFooter.querySelector('.id-propiedad').value;
+    const tipo = cardFooter.parentNode.querySelector('span[name=spantipo]').innerHTML;
+    let aceptar = confirm(`¿Realmente desea eliminar a${tipo}?`);
+    if(aceptar) {
+        eliminarPropiedades(id);
+        insertarAlerta(`${tipo} borrado`, 'danger');
+        mostrarPropiedades();
+    }
+})

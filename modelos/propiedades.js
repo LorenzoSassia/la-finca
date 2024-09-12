@@ -28,3 +28,33 @@ export function insertarPropiedades(datos) {
         return data;
     })
 }
+
+/**
+ * Actualiza los datos en la Base de Datos
+ * @param datos los datos a actualizar
+ * @param id el id de la propiedad
+ */
+export const actualizarPropiedades = (datos, id) => { // Esto es igual a haber escrito = function actualizarPropiedades(datos, id) {}
+    fetch(`${url}&accion=actualizar&id=${id}`, {
+        method: 'POST',
+        body: datos
+    }) 
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        return data;
+    })
+}
+
+/**
+ * Elimina los datos de la base de datos
+ * @param id el id de los datos a eliminar
+ */
+export const eliminarPropiedades = (id) => {
+    fetch(`${url}&accion=eliminar&id=${id}`,{})
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        return data;
+    })
+}
