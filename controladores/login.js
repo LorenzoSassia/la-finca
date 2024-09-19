@@ -9,6 +9,7 @@ const btnLogout = document.getElementById('btn-logout');
 const inputUsuario = document.getElementById('usuario');
 const inputPassword = document.getElementById('password');
 
+
 // Variables
 let usuario = '';
 let logueado = false;
@@ -30,7 +31,7 @@ frmLogin.addEventListener('submit', (e) => {
 /**
  * Busca el usuario y se loguea
  */
-const login = (datos) => {
+const login = (datos) => { 
     fetch(url, {
         method: 'POST',
         body: datos
@@ -49,7 +50,7 @@ const login = (datos) => {
         inputUsuario.value = '';
         inputPassword.value = '';
     });
-        window.location.reload();
+    //window.location.reload();
 }
 
 /**

@@ -111,9 +111,9 @@ class ModeloABM extends Modelo {
         $campos = '';
         $datos = '';
         // Para cada $valores como $key => $value
-        foreach($valores as $key => $value) {
-            $campos .= $key.",";// Agregamos cada $key a $campos 
-            $datos .= "'".$value."',";// Agregamos cada $value a $datos
+        foreach( $valores as $key => $value ) {
+            $campos .= $key.","; // Agregamos cada $key a $campos
+            $datos .= "'".$value."',"; // Agregamos cada $value a $datos
         }
         // Quitamos el ultimo caracter (,) a los campos y los datos
         $campos = substr($campos,0,strlen($campos)-1);
@@ -128,7 +128,7 @@ class ModeloABM extends Modelo {
 
     /**
      * Actualiza los datos de una tabla
-     * @param valores: los valores a modificar
+     * @param valores los valores a modificar
      */
     public function actualizar($valores) {
         // UPDATE productos SET precio = '350000' WHERE id=8

@@ -6,8 +6,12 @@ $mensaje= '';
 if(isset($_GET['tabla'])) {
     $tabla = new ModeloABM($_GET['tabla']);
 
+        if(isset($_GET['id'])){
+        $tabla->set_criterio("id=".$_GET['id']);
+        }
+
         if(isset($_GET['accion'])){
-            if($_GET['accion'] == 'insertar '|| $_GET['accion'] == 'actualizar'){
+            if($_GET['accion'] == 'insertar'|| $_GET['accion'] == 'actualizar'){
             $valores = $_POST;
         }
 
@@ -25,7 +29,7 @@ if(isset($_GET['tabla'])) {
             if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // Si esta subido el archivo temporal
                 $tmp_nombre = $_FILES['imagen']['tmp_name'];
                 $nombre = $_FILES['imagen']['name'];
-                $destino = '../imagenes/propiedades/'.$nombre;
+                $destino = '../imagenes'.$nombre;
                 if(move_uploaded_file($tmp_nombre, $destino)){ // Si se puede mover el archivo temporal a destino
                     $mensaje = 'Archivo subido correctamente';
                     $valores['imagen'] = $nombre; // Agregamos el array $valores el nombre de la imagen

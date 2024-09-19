@@ -11,7 +11,7 @@
 </head>
 
 <body >
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html">La Finca</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -80,10 +80,10 @@
                 <img src="imagenes/casa-1.jpg" class="d-block w-100 " alt="...">
             </div>
             <div class="carousel-item">
-                <img src="imagenes/casa-2.jpeg" class="d-block w-100" alt="...">
+                <img src="imagenes/depto-1.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="imagenes/casa-3.jpg" class="d-block w-100" alt="...">
+                <img src="imagenes/terreno-1.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -97,72 +97,15 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <main class="conteiner">
+    <main class="container">
         <section>
-            <div class="row">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/casa-3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Casa</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/local-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Local</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Alquilar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/terreno-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Terreno</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/depto.interior-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Departamento</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Alquilar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/depto.interior-2.jpeg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Departamento</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="imagenes/casa-2.jpeg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Casa</h5>
-                            <p class="card-text"></p>
-                            <a href="comprar.html" class="btn btn-primary">Alquilar</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="listado">
+                
             </div>
         </section>
     </main>
+
+    
 <hr>
     <footer>
         La Finca NO ejerce el corretaje inmobiliario. Cada oficina es de propiedad y gestión independiente. En cumplimiento de las leyes vigentes que regulan el corretaje inmobiliario, Ley Nacional 25.028, Ley 22.802 de Lealtad Comercial, Ley 24.240 de Defensa al Consumidor, las normas del Código Civil y Comercial de la Nación y Constitucionales, los agentes/gestores NO ejercen el corretaje inmobiliario. Todas las operaciones inmobiliarias son 
@@ -171,6 +114,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <script type="module" src="./controladores/index.js"></script>
+
+    <script src="./controladores/login.js"></script>
 </body>
 
 </html>

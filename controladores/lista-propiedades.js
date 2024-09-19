@@ -36,6 +36,10 @@ let mensajeAlerta;
 let propiedades = [];
 let propiedad = {};
 
+// Control de usuario
+let usuario = '';
+let logueado = false;
+
 
 
 /**
@@ -43,8 +47,26 @@ let propiedad = {};
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    controlUsuario();
     mostrarPropiedades();
 });
+
+/**
+ * Controla si el usuario está logueado
+ */
+const controlUsuario = () => {
+    if(sessionStorage.getItem('usuario')) {
+        usuario = sessionStorage.getItem('usuario');
+        logueado = true;
+    } else {
+        logueado = false;
+    }
+    if(logueado) {
+        btnNuevo.style.display = 'inline';
+    } else {
+        btnNuevo.style.display = 'none';
+    }
+};
 
 /*
 * Obtiene las propiedades y los muestra
@@ -63,7 +85,7 @@ propiedades.map(propiedad =>
                             <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
                             <a href="comprar.html" class="btn btn-primary">Comprar</a>
-                            <div class="card-footer "> 
+                            <div class="card-footer" style="display:${logueado?'block':'none'};"> 
                                  <a class="btn-editar btn btn-primary"> Editar</a> 
                                  <a class="btn-borrar btn btn-danger" > Borrar</a>
                                  <input type="hidden" class="id-propiedad" value="${propiedad.id}">
@@ -113,7 +135,7 @@ formulario.addEventListener('submit', (e) => {
 
             case 'actualizar':
             mensajeAlerta = 'Datos actualizados';
-            actualizarArticulos(datos, id);
+            actualizarPropiedades(datos, id);
             break;
 
     }

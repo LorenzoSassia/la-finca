@@ -6,7 +6,7 @@
  $usuario = "'".$valores['usuario']."'"; // Guardamos el usuario entre '
  $password = "'".$valores['password']."'"; // Guardamos el password entre '
 
- $usuarios = new Modelo('clientes'); // Creamos el objeto $usuarios basado en la tabla clientes
+ $usuarios = new ModeloABM('clientes'); // Creamos el objeto $usuarios basado en la tabla clientes
  $usuarios->set_criterio("usuario=$usuario AND password=$password"); // Establecemos el criterio con el usuario y el password
 
  $datos = $usuarios->seleccionar(); // Ejecutamos el método seleccionar

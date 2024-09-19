@@ -43,7 +43,7 @@ export const actualizarPropiedades = (datos, id) => { // Esto es igual a haber e
     .then(data=>{
         console.log(data);
         return data;
-    })
+    });
 }
 
 /**
