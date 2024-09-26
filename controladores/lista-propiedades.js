@@ -74,6 +74,10 @@ const controlUsuario = () => {
 async function mostrarPropiedades() {
     propiedades = await seleccionarPropiedades();
 
+    const propiedadesFiltradas = propiedades.filter(items => items.tipo.includes('Oficina'));
+  console.log(propiedadesFiltradas);
+
+
 listado.innerHTML = '';
 
 propiedades.map(propiedad =>
@@ -82,9 +86,9 @@ propiedades.map(propiedad =>
                     <div class="card" style="width: 18rem;">
                         <img src="./imagenes/${propiedad.imagen??'nodisponible.png'}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
+                            <h5 class="card-title"><span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
-                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
+                            <a href="contactar.html" class="btn btn-primary">Contactar</a>
                             <div class="card-footer" style="display:${logueado?'block':'none'};"> 
                                  <a class="btn-editar btn btn-primary"> Editar</a> 
                                  <a class="btn-borrar btn btn-danger" > Borrar</a>
@@ -182,6 +186,9 @@ on(document, 'click', '.btn-editar', e => {
 
     // Guardamos los valores del card de la Propiedad
     id = cardFooter.querySelector('.id-propiedad').value;
+    propiedad = propiedades.find(item => item.id == id);
+    console.log(propiedad);
+
     /*
     const codigo = cardFooter.parentNode.querySelector('span[name=spancodigo]').innerHTML;
     const direccion = cardFooter.parentNode.querySelector('span[name=spandireccion]').innerHTML;
@@ -195,8 +202,10 @@ on(document, 'click', '.btn-editar', e => {
     const tipo = cardFooter.parentNode.querySelector('span[name=spantipo]').innerHTML;
     const imagen = cardFooter.querySelector('.imagen-propiedad').value;
     */
+
     propiedad = propiedades.find(item => item.id == id);
     console.log(propiedad);
+
     // Asignamos los valore a los inputs del formulario
     inputCodigo.value = propiedad.codigo;
     inputDireccion.value= propiedad.direccion; 
