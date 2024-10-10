@@ -29,10 +29,12 @@ const inputTipo = document.querySelector("#tipo");
 const frmImagen = document.querySelector('#frmImagen');
 
 // Variables
+let buscar = '';
 let opcion = '';
 let id;
 let mensajeAlerta;
 
+let propiedadesFiltradas = [];
 let propiedades = [];
 let propiedad = {};
 
@@ -46,8 +48,12 @@ let logueado = false;
  *  Esta funcion se ejecuta cuando todo el contenido esta guardado
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+
+
+document.addEventListener('DOMContentLoaded', async () => {
     controlUsuario();
+    propiedades = await obtenerPropiedades();
+    propiedadesFiltradas = filtrarPorTipo('');
     mostrarPropiedades();
 });
 
@@ -68,19 +74,30 @@ const controlUsuario = () => {
     }
 };
 
-/*
-* Obtiene las propiedades y los muestra
-*/
-async function mostrarPropiedades() {
+/**
+ * Obtiene las propiedades
+ */
+async function obtenerPropiedades() {
     propiedades = await seleccionarPropiedades();
+    return propiedades;
+}
 
-    const propiedadesFiltradas = propiedades.filter(items => items.tipo.includes('Oficina'));
-  console.log(propiedadesFiltradas);
 
+/**
+*  Filtra las propiedades por tipo
+* @param n  el tipo de propiedad
+* @return propiedades filtrados
+ */
 
-listado.innerHTML = '';
+function filtrarPorTipo(n) {
+    propiedadesFiltradas = propiedades.filter(items => items.tipo.includes(n));
+    return propiedadesFiltradas;
+}
 
-propiedades.map(propiedad =>
+ function mostrarPropiedades() {
+    listado.innerHTML = '';
+
+    propiedadesFiltradas.map(propiedad =>
     listado.innerHTML += `
         <div class="col">
                     <div class="card" style="width: 18rem;">
@@ -89,7 +106,7 @@ propiedades.map(propiedad =>
                             <h5 class="card-title"><span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
                             <a href="contactar.html" class="btn btn-primary">Contactar</a>
-                            <div class="card-footer" style="display:${logueado?'block':'none'};"> 
+                            <div class="card-footer ${logueado?'d-flex':'d-none'}"> 
                                  <a class="btn-editar btn btn-primary"> Editar</a> 
                                  <a class="btn-borrar btn btn-danger" > Borrar</a>
                                  <input type="hidden" class="id-propiedad" value="${propiedad.id}">
@@ -100,6 +117,31 @@ propiedades.map(propiedad =>
         </div>               
     `);
 }
+
+/**
+ * Filtro de las propiedades
+ */
+const botonesFiltros = document.querySelectorAll('#filtros button');
+botonesFiltros.forEach(boton => {
+    boton.addEventListener('click', e => {
+        boton.classList.add('active');
+        boton.setAttribute('aria-current', 'page');
+
+        botonesFiltros.forEach(otroBoton => {
+            if(otroBoton !== boton) {
+                otroBoton.classList.remove('active');
+                otroBoton.removeAttribute('aria-current');
+            }
+        });
+
+        buscar = boton.innerHTML;
+        if(buscar == 'Todos') {
+            buscar = '';
+        }
+        filtrarPorTipo(buscar);
+        mostrarPropiedades();
+    })
+})
 
 /**
  * Ejecuta el evento 'click' del boton nuevo
