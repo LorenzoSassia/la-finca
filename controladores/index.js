@@ -2,6 +2,9 @@ import { seleccionarPropiedades } from "../modelos/propiedades.js";
 
 
 /* Objetos del DOM*/
+// Nav
+const navrecibo = document.querySelector('#navrecibo')
+
 // Listado de Propiedades
 const listado = document.querySelector('#listado');
 
@@ -20,6 +23,7 @@ let logueado = false;
 document.addEventListener('DOMContentLoaded', () => {
     controlUsuario();
     mostrarPropiedades();
+    mostrarNavCompleto();
 });
 
 /**
@@ -50,12 +54,28 @@ propiedades.map(propiedad =>
                         <div class="card-body">
                             <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
-                            <a href="comprar.html" class="btn btn-primary">Comprar</a>
+                            <a href="contactar.html" class="btn btn-primary">Contactar</a>
                             
                         </div>
                     </div> 
         </div>               
     `);
+}
+
+/**
+ * Muestra las opciones del nav una vez logueado
+ */
+function mostrarNavCompleto(){
+    navrecibo.innerHTML = '';
+
+    nav.map(nav =>
+        navrecibo.innerHTML += ` 
+                    <li class="nav-item" id="nav-recibo">
+                        <a class="nav-link ${logueado?'d-flex':'d-none'}" href="recibos.html">Recibos</a>
+                    </li>
+        `
+    )
+    
 }
 
 

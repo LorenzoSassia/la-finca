@@ -59,7 +59,7 @@ const login = (datos) => {
 const verificar = () => {
     if(sessionStorage.getItem('usuario')) {
         usuario = sessionStorage.getItem('usuario');
-        textoLogueado.innerHTML = `Bienvenido: ${usuario}`;
+        textoLogueado.innerHTML = `Bienvenido ${usuario}`;
         logueado = true;
     }
 
