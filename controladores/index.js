@@ -54,7 +54,7 @@ propiedades.map(propiedad =>
                         <div class="card-body">
                             <h5 class="card-title"><span name="spancodigo">${propiedad.codigo} </span> -<span name="spantipo"> ${propiedad.tipo}</span> </h5>
                             <p class="card-text">${propiedad.direccion} ${propiedad.numero} - ${propiedad.localidad}</p>
-                            <a href="contactar.html" class="btn btn-primary">Contactar</a>
+                            <a href="recibos.html" class="btn btn-primary">Generar recibo</a>
                             
                         </div>
                     </div> 
